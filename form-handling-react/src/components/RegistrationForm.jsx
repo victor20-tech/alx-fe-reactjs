@@ -1,42 +1,68 @@
-import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+import React, { useState } from 'react';
 
-const validationSchema = Yup.object({
-    username: Yup.string().required('Username is required'),
-    email: Yup.string().email('Invalid email address').required('Email is required'),
-    password: Yup.string().required('Password is required')
-});
+const RegistrationForm = () => {
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [errors, setErrors] = useState({
+        username: '',
+        email: '',
+        password: ''
+    });
 
-const RegistrationForm = () => (
-    <Formik
-        initialValues={{ username: '', email: '', password: '' }}
-        validationSchema={validationSchema}
-        onSubmit={(values) => {
-            console.log('Form submitted:', values);
-        }}
-    >
-        {() => (
-            <Form>
-                <div>
-                    <label htmlFor="username">Username</label>
-                    <Field type="text" id="username" name="username" />
-                    <ErrorMessage name="username" component="p" />
-                </div>
-                <div>
-                    <label htmlFor="email">Email</label>
-                    <Field type="email" id="email" name="email" />
-                    <ErrorMessage name="email" component="p" />
-                </div>
-                <div>
-                    <label htmlFor="password">Password</label>
-                    <Field type="password" id="password" name="password" />
-                    <ErrorMessage name="password" component="p" />
-                </div>
-                <button type="submit">Register</button>
-            </Form>
-        )}
-    </Formik>
-);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // Basic validation
+        const newErrors = {};
+        if (!username) newErrors.username = 'Username is required';
+        if (!email) newErrors.email = 'Email is required';
+        if (!password) newErrors.password = 'Password is required';
+        setErrors(newErrors);
+
+        if (Object.keys(newErrors).length === 0) {
+            console.log('Form submitted:', { username, email, password });
+        }
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <div>
+                <label htmlFor="username">Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+                {errors.username && <p>{errors.username}</p>}
+            </div>
+            <div>
+                <label htmlFor="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                {errors.email && <p>{errors.email}</p>}
+            </div>
+            <div>
+                <label htmlFor="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                {errors.password && <p>{errors.password}</p>}
+            </div>
+            <button type="submit">Register</button>
+        </form>
+    );
+};
 
 export default RegistrationForm;
