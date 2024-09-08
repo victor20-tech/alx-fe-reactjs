@@ -1,10 +1,9 @@
 import React from 'react';
+import UserProfile from './components/UserProfile';
 
 const App = () => {
   return (
-    <div>
-      Hello
-    </div>
+    <UserProfile />
   );
 }
 
