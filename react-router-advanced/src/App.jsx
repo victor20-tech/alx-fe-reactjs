@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Profile from './components/Profile';
 import Login from './components/Login';
-import ProtectedRoute from './components/ProtectedRoute';
 import BlogPost from './components/BlogPost';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -13,8 +13,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile/*" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-        <Route path="/posts/:postId" element={<BlogPost />} />
-
+        <Route path="/blog/:id" element={<BlogPost />} />
       </Routes>
     </Router>
   );
