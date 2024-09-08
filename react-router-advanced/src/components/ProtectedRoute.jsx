@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children }) => {
     useEffect(() => {
         // Simulate an authentication check
         const checkAuth = () => {
-            // Replace this with actual authentication check logic
+            // Replace this with actual authentication logic
             const authStatus = true; // Simulate authenticated state (true/false)
             setIsAuthenticated(authStatus);
         };
