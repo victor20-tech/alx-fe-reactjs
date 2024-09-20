@@ -1,5 +1,5 @@
+// src/components/Homepage.jsx
 import React, { useState, useEffect } from "react";
-import Card from "./Card"; // Import the Card component
 import recipeData from "../data.json"; // Import the data from the src directory
 
 const Homepage = () => {
@@ -20,7 +20,13 @@ const Homepage = () => {
             <h1 className="text-3xl font-bold text-center mb-8">Recipe List</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                 {recipes.map((recipe) => (
-                    <Card key={recipe.id} recipe={recipe} /> // Pass each recipe to Card
+                    <div key={recipe.id} className="card bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <img src={recipe.image} alt={recipe.name} className="w-full h-48 object-cover rounded-t-lg" />
+                        <div className="p-4">
+                            <h2 className="text-lg font-bold text-gray-800">{recipe.name}</h2>
+                            <p className="text-gray-600">Ingredients: {recipe.summary}</p>
+                        </div>
+                    </div>
                 ))}
             </div>
         </div>
