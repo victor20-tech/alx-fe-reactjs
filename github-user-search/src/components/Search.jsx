@@ -53,7 +53,7 @@ function Search() {
             </form>
 
             {loading && <p>Loading...</p>}
-            {error && <p>Looks like we cant find any users</p>}
+            {error && <p>Looks like we cant find the user</p>}
             {userData.length > 0 && (
                 <ul className="mt-4 space-y-2">
                     {userData.map(user => (
