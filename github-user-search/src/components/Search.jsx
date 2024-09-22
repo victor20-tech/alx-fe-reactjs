@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-function SearchUser({ onSearch }) {
+function Search({ onSearch, userData, loading, error }) {
     const [username, setUsername] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (username) {
-            onSearch(username); // Call the parent component function with the username
+            onSearch(username); // Call the parent function with the username
         }
     };
 
@@ -21,8 +21,21 @@ function SearchUser({ onSearch }) {
                 />
                 <button type="submit">Search</button>
             </form>
+
+            {loading && <p>Loading...</p>}
+            {error && <p>Looks like we can't find the user.</p>}
+            {userData && (
+                <div>
+                    <img src={userData.avatar_url} alt={userData.name} width="100" />
+                    <h2>{userData.name}</h2>
+                    <p>Username: {userData.login}</p>
+                    <a href={userData.html_url} target="_blank" rel="noreferrer">
+                        Visit GitHub Profile
+                    </a>
+                </div>
+            )}
         </div>
     );
 }
 
-export default SearchUser;
+export default Search;
